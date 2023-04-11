@@ -1,0 +1,110 @@
+﻿<Window x:Class="Project.View.OwnerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.View"
+        mc:Ignorable="d"
+        Title="OwnerView" Height="500" Width="880">
+    <StackPanel>
+        <ToolBar>
+            <Button x:Name="btSignOut" Content="Sign out" Margin="2" BorderBrush="Black" HorizontalAlignment="Right" Click="btSignOut_Click"/>
+        </ToolBar>
+
+        <TabControl Margin="8,10">
+
+            <TabItem Header="My accommodations">
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Path=Accommodations}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"/>
+                        <DataGridTextColumn Header="Country" Binding="{Binding Path=Location.Country}"/>
+                        <DataGridTextColumn Header="City" Binding="{Binding Path=Location.City}"/>
+                        <DataGridTextColumn Header="Accommodation type" Binding="{Binding Path=AccommodationType}"/>
+                        <DataGridTextColumn Header="Maximum guest number" Binding="{Binding Path=MaxGuests}"/>
+                        <DataGridTextColumn Header="Minimum reservation days" Binding="{Binding Path=MinReservationDays}"/>
+                        <DataGridTextColumn Width="*" Header="Minimum cancellation period" Binding="{Binding Path=CancellationPeriod}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Add accommodation">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Name" FontWeight="DemiBold" Margin="10,10"/>
+                            <TextBox x:Name="tbName"  Width="100" HorizontalAlignment="Left" Margin="10,0"/>
+                            <TextBlock Text="Accommodation type" FontWeight="DemiBold" Margin="10,10"/>
+                            <RadioButton x:Name="rbApartment" Margin="30,0,0,5" Content="APPARTMENT"/>
+                            <RadioButton x:Name="rbHouse" Margin="30,0,0,5" Content="HOUSE"/>
+                            <RadioButton x:Name="rbCottage" Margin="30,0,0,0" Content="COTTAGE"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Location" FontWeight="DemiBold" Margin="10,10"/>
+                            <ComboBox x:Name="cbCountry" SelectionChanged="cbCountry_SelectionChanged" ItemsSource="{Binding Path=Countries, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedItem="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left"/>
+                            <ComboBox ItemsSource="{Binding Path=CountryCities, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,0,0" Width="100" HorizontalAlignment="Left"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10*"/>
+                                    <ColumnDefinition Width="7*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Maximum number of guests" FontWeight="DemiBold" Margin="10,20,0,0" Grid.Column="0"/>
+                                <TextBox x:Name="tbMaximumGuests" Margin="5,15,0,0" Grid.Column="1" Width="25" HorizontalAlignment="left"/>
+                            </Grid>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Minimum advance reservation days" FontWeight="DemiBold" Margin="9,20,0,0" Grid.Column="0"/>
+                                <TextBox x:Name="tbAdvanceReservation" Margin="5,15,0,0" Grid.Column="1" Width="25" HorizontalAlignment="left"/>
+                            </Grid>
+                            <Grid Margin="0,20,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="31*"/>
+                                    <ColumnDefinition Width="88*"/>
+                                    <ColumnDefinition Width="24*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Cancel reservation-minimum days before" FontWeight="DemiBold" Margin="9,20,0,0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="tbCancellationPeriod" Margin="5,15,0,0" Grid.Column="2" Width="25" Text="1" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </StackPanel>
+
+                    </Grid>
+                    <TextBlock Text="Paste image link" FontWeight="DemiBold" Margin="9,20,0,0" Grid.Column="0"/>
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="tbAddLink" Grid.Column="0" Width="200" HorizontalAlignment="Left" Margin="10,0"/>
+                        <Button x:Name="btAddImage" Click="btAddImage_Click" Content="Add image" Width="80" HorizontalAlignment="Left" Grid.ColumnSpan="2" Height="20" Margin="245,0,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="14*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblImageAdded" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Button x:Name="btAddAccommodation" Content="Add" HorizontalAlignment="Right" Grid.Column="1" Height="50" Width="100" Click="btAddAccommodation_click"/>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+
+
+    </StackPanel>
+</Window>

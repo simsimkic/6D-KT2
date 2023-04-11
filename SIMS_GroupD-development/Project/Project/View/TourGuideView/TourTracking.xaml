@@ -1,0 +1,63 @@
+﻿<Window x:Class="Project.View.TourGuideView.TourTracking"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.View.TourGuideView"
+        mc:Ignorable="d"
+        Title="TourTracking" Height="450" Width="500"
+        Loaded="Window_Loaded">
+    <Grid>
+        <DockPanel>
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="nextPoint" Grid.Column="0" Content="Next point" Margin="10" Click="nextPoint_Click"/>
+                <Button x:Name="endTour" Grid.Column="1" Content="Finish the tour" Margin="10" Click="endTour_Click"/>
+            </Grid>
+
+            <TextBlock x:Name="tourName" DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="24" FontFamily="Century Gothic" ></TextBlock>
+
+            <Grid DockPanel.Dock="Left" Width="200" Margin="10">
+                <Border BorderBrush="Black" BorderThickness="2">
+                <StackPanel x:Name="RadioStackPanel" Grid.Row="1" Background="LightGray"></StackPanel>
+                </Border>
+            </Grid>
+
+            <GroupBox DockPanel.Dock="Right" Margin="10">
+
+                
+                <GroupBox.Header>
+                    <Label>Guests</Label>
+                </GroupBox.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <ListBox Grid.Row="0" ItemsSource="{Binding Presents}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Username}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button x:Name="AddGuests" Margin="5" Grid.Row="1" Content="Add guests to current point" Click="AddGuests_Click"/>
+
+
+                </Grid>
+                
+
+
+            </GroupBox>
+            
+            
+        </DockPanel>
+        
+    </Grid>
+</Window>

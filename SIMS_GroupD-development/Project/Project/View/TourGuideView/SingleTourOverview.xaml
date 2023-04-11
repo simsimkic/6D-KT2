@@ -1,0 +1,93 @@
+﻿<Window x:Class="Project.View.TourGuideView.SingleTourOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.View.TourGuideView"
+        mc:Ignorable="d"
+        Title="SingleTourOverview" Height="450" Width="800"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Background="DarkGray" Margin="10" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=NameOfTour, UpdateSourceTrigger=PropertyChanged}"></Label>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Country:"/>
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"></Label>
+            
+            <Label Grid.Row="2" Grid.Column="0" Content="City:"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"></Label>
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Description:"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+            <Label Grid.Row="4" Grid.Column="0" Content="Language:"/>
+            <Label Grid.Row="4" Grid.Column="1" Content="{Binding Path=LanguageOfTour, UpdateSourceTrigger=PropertyChanged}"></Label>
+
+            <Label Grid.Row="5" Grid.Column="0" Content="Max number of guests:"/>
+            <Label Grid.Row="5" Grid.Column="1" Content="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}"></Label>
+
+            <Label Grid.Row="6" Grid.Column="0" Content="Duration:"/>
+            <Label Grid.Row="6" Grid.Column="1" Content="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}"></Label>
+
+
+
+        </Grid>
+
+        <Grid x:Name="rightSideGrid" Grid.Column="1" Margin="0,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+
+            </Grid.RowDefinitions>
+
+
+            <Button x:Name="startTour" Grid.Row="0" Margin="0,20,0,0" Click="startTour_Click">Start tour</Button>
+
+
+            <GroupBox Grid.Row="1" BorderBrush="Black" Margin="0,0,0,10">
+                <GroupBox.Header>
+                    <Label Content="Guests with reservation"/>
+                </GroupBox.Header>
+                <ListBox x:Name="guestsWithReservation" ItemsSource="{Binding Reservations, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Username}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    
+                </ListBox>
+            </GroupBox>
+            
+            <GroupBox Grid.Row="2" BorderBrush="Black" Margin="0,0,0,10"> 
+                <GroupBox.Header>
+                    <Label Content="Images"></Label>
+                </GroupBox.Header>
+                <WrapPanel x:Name="imagesWrap"></WrapPanel>
+            </GroupBox>
+            
+        </Grid>
+            
+     </Grid>
+</Window>
